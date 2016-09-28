@@ -23,7 +23,7 @@ public class PGenCommonProxy{
 		PGenTileEntity.main();
 		PGenBlock.registerBlock();
 		NetworkRegistry.INSTANCE.registerGuiHandler(PGenMain.instance, new PGenGuiHandler());
-		//MinecraftForge.EVENT_BUS.register(new PGenEventHandler());
+		MinecraftForge.EVENT_BUS.register(new PGenEventHandler());
 	}
 
 	public void postInit(FMLPostInitializationEvent postInitEvent){
