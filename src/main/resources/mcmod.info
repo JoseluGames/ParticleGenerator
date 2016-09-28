@@ -1,0 +1,16 @@
+[
+{
+  "modid": "jlgm_pgen",
+  "name": "Particle generator",
+  "description": "Particles, YAY!",
+  "version": "",
+  "mcversion": "${mcversion}",
+  "url": "https://minecraft.curseforge.com/projects/particlesgenerator",
+  "updateUrl": "",
+  "authorList": ["JoseluGames"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

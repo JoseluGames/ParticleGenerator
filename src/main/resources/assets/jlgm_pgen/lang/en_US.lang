@@ -1,0 +1,26 @@
+tile.particleGenerator.name=Particle generator
+
+container.particlegenerator=Particle generator
+container.particlegenerator.arguments=Arguments
+
+container.particlegenerator.example=For example:
+
+container.particlegenerator.tip1_1.line1=This cannot
+container.particlegenerator.tip1_1.line2=be empty.
+container.particlegenerator.tip1_2.line1=is not a valid ID!
+
+container.particlegenerator.tip2.line1=Particle color
+container.particlegenerator.tip2.line2=Some particles use
+container.particlegenerator.tip2.line3=the velocity for their
+container.particlegenerator.tip2.line4=color. Use the 0.0-1.0
+container.particlegenerator.tip2.line5=range.
+
+container.particlegenerator.tip3_1.line1=Item ID
+container.particlegenerator.tip3_2.line1=Block ID
+
+
+container.particlegenerator.tip4_1.line1=Item metadata
+container.particlegenerator.tip4_2.line1=Block metadata
+
+container.particlegenerator.tip5.line1=Warning!
+container.particlegenerator.tip5.line2=This particle takes arguments.
