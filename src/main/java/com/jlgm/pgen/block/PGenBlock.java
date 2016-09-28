@@ -33,6 +33,6 @@ public class PGenBlock{
 	public static void renderBlock(){
 		ItemModelMesher modelMesherItem = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
 		
-		modelMesherItem.register(particleGenerator_ItemBlock, 0, new ModelResourceLocation(PGenConstants.MODID + ":" + "test", "inventory"));
+		modelMesherItem.register(particleGenerator_ItemBlock, 0, new ModelResourceLocation(PGenConstants.MODID + ":" + "particleGenerator", "inventory"));
 	}
 }

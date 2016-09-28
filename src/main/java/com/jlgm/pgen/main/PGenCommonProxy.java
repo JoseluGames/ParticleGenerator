@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class PGenCommonProxy{
 
@@ -23,6 +25,7 @@ public class PGenCommonProxy{
 		PGenTileEntity.main();
 		PGenBlock.registerBlock();
 		NetworkRegistry.INSTANCE.registerGuiHandler(PGenMain.instance, new PGenGuiHandler());
+		GameRegistry.addRecipe(new ShapedOreRecipe(PGenBlock.particleGenerator_Block, "CGC", "CRC", "CCC", 'C', "cobblestone", 'R', "dustRedstone", 'G', "gunpowder"));
 		MinecraftForge.EVENT_BUS.register(new PGenEventHandler());
 	}
 
