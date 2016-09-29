@@ -1,3 +1,7 @@
+1.10.2-0.1.2
+Fix update link, please go manually to the curse forge web:
+https://minecraft.curseforge.com/projects/particle-generator
+##
 1.10.2-0.1.1
 Add crafting recipe
 Fix item icon
