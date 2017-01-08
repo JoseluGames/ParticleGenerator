@@ -194,9 +194,29 @@ public class GuiParticleGenerator extends GuiScreen{
 		this.fontRendererObj.drawString("vY:", basePointX + 7, basePointY + 137, 0x404040);
 		this.fontRendererObj.drawString("vZ:", basePointX + 7, basePointY + 153, 0x404040);
 		
-		float r = Float.valueOf(this.movementX.getText().isEmpty()? "0" : this.movementX.getText());
-		float g = Float.valueOf(this.movementY.getText().isEmpty()? "0" : this.movementY.getText());
-		float b = Float.valueOf(this.movementZ.getText().isEmpty()? "0" : this.movementZ.getText());
+		float r;
+		
+		try{
+			r = Float.valueOf(this.movementX.getText().isEmpty()? "0" : this.movementX.getText());
+		} catch(NumberFormatException e){
+			r = tile.vX;
+		}
+		
+		float g;
+		
+		try{
+			g = Float.valueOf(this.movementY.getText().isEmpty()? "0" : this.movementY.getText());
+		} catch(NumberFormatException e){
+			g = tile.vY;
+		}
+		
+		float b;
+		
+		try{
+			b = Float.valueOf(this.movementZ.getText().isEmpty()? "0" : this.movementZ.getText());
+		} catch(NumberFormatException e){
+			b = tile.vZ;
+		}
 		
 		Color col = new Color((float) Math.max(0.0f, Math.min(1.0f, r)), (float) Math.max(0.0f, Math.min(1.0f, g)), (float) Math.max(0.0f, Math.min(1.0f, b)));
 		this.drawRect(basePointX + 68, basePointY + 119, basePointX + 73, basePointY + 163, col.getRGB()/*((255 & 0x0ff) << 24) | ((r & 0x0ff) << 16) | ((g & 0x0ff) << 8) | (b & 0x0ff)*/);
@@ -386,12 +406,56 @@ public class GuiParticleGenerator extends GuiScreen{
 	protected void actionPerformed(GuiButton button) throws IOException{
 		if(button == this.doneButton){
 			int particleID = chosedParticle;
-			float x = Float.valueOf((this.positionX.getText().isEmpty()?"0":this.positionX.getText()));
-			float y = Float.valueOf((this.positionY.getText().isEmpty()?"0":this.positionY.getText()));
-			float z = Float.valueOf((this.positionZ.getText().isEmpty()?"0":this.positionZ.getText()));
-			float vX = Float.valueOf((this.movementX.getText().isEmpty()?"0":this.movementX.getText()));
-			float vY = Float.valueOf((this.movementY.getText().isEmpty()?"0":this.movementY.getText()));
-			float vZ = Float.valueOf((this.movementZ.getText().isEmpty()?"0":this.movementZ.getText()));
+			
+			float x;
+			
+			try{
+				x = Float.valueOf((this.positionX.getText().isEmpty()?"0":this.positionX.getText()));
+			} catch(NumberFormatException e){
+				x = tile.x;
+			}
+			
+			float y;
+			
+			try{
+				y = Float.valueOf((this.positionY.getText().isEmpty()?"0":this.positionY.getText()));
+			} catch(NumberFormatException e){
+				y = tile.y;
+			}
+			
+			float z;
+			
+			try{
+				z = Float.valueOf((this.positionZ.getText().isEmpty()?"0":this.positionZ.getText()));
+			} catch(NumberFormatException e){
+				z = tile.z;
+			}
+			
+			
+			float vX;
+			
+			try{
+				vX = Float.valueOf((this.movementX.getText().isEmpty()?"0":this.movementX.getText()));
+			} catch(NumberFormatException e){
+				vX = tile.vX;
+			}
+			
+			float vY;
+			
+			try{
+				vY = Float.valueOf((this.movementY.getText().isEmpty()?"0":this.movementY.getText()));
+			} catch(NumberFormatException e){
+				vY = tile.vY;
+			}
+			
+			float vZ;
+			
+			try{
+				vZ = Float.valueOf((this.movementZ.getText().isEmpty()?"0":this.movementZ.getText()));
+			} catch(NumberFormatException e){
+				vZ = tile.vZ;
+			}
+			
 			/*float x = Float.valueOf(positionX.getText().replace("~", String.valueOf(this.tile.getPos().getX())));
 			float y = Float.valueOf(positionY.getText().replace("~", String.valueOf(this.tile.getPos().getY())));
 			float z = Float.valueOf(positionZ.getText().replace("~", String.valueOf(this.tile.getPos().getZ())));

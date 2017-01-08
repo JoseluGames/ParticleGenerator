@@ -10,7 +10,7 @@ public class PGenConstants{
 	public static final String MCVERSION = "1.11.2";
 	public static final String MAJOR = "1";
 	public static final String MINOR = "0";
-	public static final String PATCH = "0";
+	public static final String PATCH = "1";
 	public static final String RELEASETYPE = "";
 	
 	//The version of the mod
