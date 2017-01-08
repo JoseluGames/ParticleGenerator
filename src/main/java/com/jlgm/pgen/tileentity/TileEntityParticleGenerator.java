@@ -27,14 +27,14 @@ public class TileEntityParticleGenerator extends TileEntity implements ITickable
 	
 	@Override
 	public void update() {
-		if(this.worldObj.isRemote){
-			if(this.worldObj.isBlockPowered(this.getPos())){
+		if(this.world.isRemote){
+			if(this.world.isBlockPowered(this.getPos())){
 				if(particleID == EnumParticleTypes.ITEM_CRACK.getParticleID()){
-					this.worldObj.spawnParticle(EnumParticleTypes.getParticleFromId(particleID), x, y, z, vX, vY, vZ, new int[]{arg1ID, arg2Metadata});
+					this.world.spawnParticle(EnumParticleTypes.getParticleFromId(particleID), x, y, z, vX, vY, vZ, new int[]{arg1ID, arg2Metadata});
 				}else if(particleID == EnumParticleTypes.BLOCK_CRACK.getParticleID() || particleID == EnumParticleTypes.BLOCK_DUST.getParticleID() || particleID == EnumParticleTypes.FALLING_DUST.getParticleID()){
-					this.worldObj.spawnParticle(EnumParticleTypes.getParticleFromId(particleID), x, y, z, vX, vY, vZ, new int[]{Block.getStateId(Block.getBlockById(arg1ID).getStateFromMeta(arg2Metadata))});
+					this.world.spawnParticle(EnumParticleTypes.getParticleFromId(particleID), x, y, z, vX, vY, vZ, new int[]{Block.getStateId(Block.getBlockById(arg1ID).getStateFromMeta(arg2Metadata))});
 				}else{
-					this.worldObj.spawnParticle(EnumParticleTypes.getParticleFromId(particleID), x, y, z, vX, vY, vZ);
+					this.world.spawnParticle(EnumParticleTypes.getParticleFromId(particleID), x, y, z, vX, vY, vZ);
 				}
 			}
 		}

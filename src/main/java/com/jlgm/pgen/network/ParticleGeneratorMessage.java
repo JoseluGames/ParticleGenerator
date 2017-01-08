@@ -67,7 +67,7 @@ public class ParticleGeneratorMessage implements IMessage{
 		
 		@Override
 		public IMessage onMessage(ParticleGeneratorMessage message, MessageContext ctx) {
-			TileEntity tile = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.pos);
+			TileEntity tile = ctx.getServerHandler().playerEntity.world.getTileEntity(message.pos);
 			if(tile instanceof TileEntityParticleGenerator){
 				TileEntityParticleGenerator pgen = (TileEntityParticleGenerator) tile;
 				pgen.particleID = message.particleID;

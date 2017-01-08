@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "jlgm_pgen:particleGenerator" }
+        "normal": { "model": "jlgm_pgen:particlegenerator" }
     }
 }

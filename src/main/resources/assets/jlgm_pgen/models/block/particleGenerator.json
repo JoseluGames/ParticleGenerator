@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "jlgm_pgen:blocks/particleGenerator"
+        "all": "jlgm_pgen:blocks/particlegenerator"
     }
 }

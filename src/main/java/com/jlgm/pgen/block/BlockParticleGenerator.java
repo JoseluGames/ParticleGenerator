@@ -25,7 +25,8 @@ public class BlockParticleGenerator extends BlockContainer{
 	}
 	
 	@Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ){
+	
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ){
 		if(worldIn.isRemote){
 			playerIn.openGui(PGenMain.instance, PGenGuiHandler.GUI_ID, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}

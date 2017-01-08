@@ -14,7 +14,7 @@ public class PGenEventHandler{
 
 	@SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
 	public void onPlayerTickEvent(PlayerTickEvent event){
-		if(!PGenMain.haveWarnedVersionOutOfDate && event.player.worldObj.isRemote && !PGenMain.versionChecker.isLatestVersion()){
+		if(!PGenMain.haveWarnedVersionOutOfDate && event.player.world.isRemote && !PGenMain.versionChecker.isLatestVersion()){
 			ClickEvent versionCheckChatClickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, "https://minecraft.curseforge.com/projects/Particle-Generator");
 			Style clickableChatStyle = new Style().setClickEvent(versionCheckChatClickEvent).setColor(TextFormatting.GREEN);
 			TextComponentString versionWarningChatComponent = new TextComponentString("Particle Generator is outdated! Click here to update to ");
@@ -22,10 +22,10 @@ public class PGenEventHandler{
 			versionComponent.setStyle(new Style().setColor(TextFormatting.RED).setBold(true).setUnderlined(true));
 			versionWarningChatComponent.setStyle(clickableChatStyle);
 			versionWarningChatComponent.appendSibling(versionComponent);
-			event.player.addChatMessage(versionWarningChatComponent);
-			event.player.addChatComponentMessage(new TextComponentString("Changelog: ").setStyle(new Style().setColor(TextFormatting.YELLOW)));
+			event.player.sendMessage(versionWarningChatComponent);
+			event.player.sendMessage(new TextComponentString("Changelog: ").setStyle(new Style().setColor(TextFormatting.YELLOW)));
 			for(int i = 1; i < PGenMain.versionChecker.getLatestVersionInfo().size(); i++){
-				event.player.addChatMessage(new TextComponentString("- " + PGenMain.versionChecker.getLatestVersionInfo().get(i)).setStyle(new Style().setColor(TextFormatting.YELLOW)));
+				event.player.sendMessage(new TextComponentString("- " + PGenMain.versionChecker.getLatestVersionInfo().get(i)).setStyle(new Style().setColor(TextFormatting.YELLOW)));
 			}
 			PGenMain.haveWarnedVersionOutOfDate = true;
 		}
