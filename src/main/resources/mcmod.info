@@ -3,7 +3,7 @@
   "modid": "jlgm_pgen",
   "name": "Particle generator",
   "description": "Particles, YAY!",
-  "version": "",
+  "version": "1.11.2-1.0.1",
   "mcversion": "${mcversion}",
   "url": "https://minecraft.curseforge.com/projects/particlesgenerator",
   "updateUrl": "",
