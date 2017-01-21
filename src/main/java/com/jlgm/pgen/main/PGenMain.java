@@ -1,5 +1,7 @@
 package com.jlgm.pgen.main;
 
+import org.apache.logging.log4j.Logger;
+
 import com.jlgm.pgen.lib.PGenConstants;
 import com.jlgm.pgen.lib.PGenVersionChecker;
 
@@ -25,9 +27,11 @@ public class PGenMain{
 	public static PGenCommonProxy proxy;
 	@Instance(PGenConstants.MODID)
 	public static PGenMain instance;
+	public static Logger logger;
 
 	@EventHandler
 	public static void PreInit(FMLPreInitializationEvent preInitEvent){
+		logger = preInitEvent.getModLog();
 		proxy.preInit(preInitEvent);
 	}
 

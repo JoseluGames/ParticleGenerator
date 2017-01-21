@@ -9,6 +9,8 @@ import java.util.Iterator;
 
 import org.apache.commons.io.IOUtils;
 
+import com.jlgm.pgen.main.PGenMain;
+
 public class PGenVersionChecker implements Runnable{
 
 	private static ArrayList<String> latestVersionInfo = new ArrayList<String>();
@@ -44,7 +46,19 @@ public class PGenVersionChecker implements Runnable{
 		}finally{
 			IOUtils.closeQuietly(in);
 		}
-		isLatestVersion = PGenConstants.VERSION.equals(latestVersion);
+
+		// hack by trevorjd to suppress version-check message 
+				if (PGenConfigStorage.versionChecking)
+				{
+					isLatestVersion = PGenConstants.VERSION.equals(latestVersion);
+				}
+				else
+				{
+				// version checking is disabled in config. 
+				PGenMain.logger.info("Version checking is disabled in config.");
+				isLatestVersion = true;
+				}
+				// end hack
 	}
 
 	public boolean isLatestVersion(){
