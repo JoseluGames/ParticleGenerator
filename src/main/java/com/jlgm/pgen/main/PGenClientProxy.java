@@ -18,7 +18,6 @@ public class PGenClientProxy extends PGenCommonProxy{
 	@Override
 	public void init(FMLInitializationEvent initEvent){
 		super.init(initEvent);
-		PGenTileEntity.registerTESR();
 		PGenBlock.renderBlock();
 	}
 

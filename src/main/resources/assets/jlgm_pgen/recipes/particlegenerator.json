@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"CGC",
+		"CRC",
+		"CCC"
+	],
+	"key": {
+		"C": {
+			"item": "minecraft:cobblestone"
+		},
+		"R": {
+			"item": "minecraft:redstone"
+		},
+		"G": {
+			"item": "minecraft:gunpowder"
+		}
+	},
+	"result": {
+		"item": "particlegenerator"
+	}
+}

@@ -5,34 +5,33 @@ import com.jlgm.pgen.lib.PGenConstants;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.event.RegistryEvent;
 
 public class PGenBlock{
 	
 	public static Block particleGenerator_Block;
 	public static ItemBlock particleGenerator_ItemBlock;
 	
-	public static void main(){
-		initialiseBlock();
+	public static void registerBlocks(RegistryEvent.Register<Block> event){
+		particleGenerator_Block = new BlockParticleGenerator(Material.ROCK).setUnlocalizedName("particlegenerator").setHardness(0.7F).setResistance(0.5F).setCreativeTab(CreativeTabs.REDSTONE);
+		event.getRegistry().register(particleGenerator_Block.setRegistryName("particlegenerator"));
 	}
 
-	public static void initialiseBlock(){
-		particleGenerator_Block = new BlockParticleGenerator(Material.ROCK).setUnlocalizedName("particleGenerator").setHardness(0.7F).setResistance(0.5F).setCreativeTab(CreativeTabs.REDSTONE);
+	public static void registerItemBlocks(RegistryEvent.Register<Item> event){
 		particleGenerator_ItemBlock = new ItemBlock(particleGenerator_Block);
+		event.getRegistry().register(particleGenerator_ItemBlock.setRegistryName(particleGenerator_Block.getRegistryName()));
 	}
-
-	public static void registerBlock(){
-		GameRegistry.register(particleGenerator_Block.setRegistryName("particleGenerator"));
-		GameRegistry.register(particleGenerator_ItemBlock.setRegistryName(particleGenerator_Block.getRegistryName()));
-	}
-
+	
 	public static void renderBlock(){
-		ItemModelMesher modelMesherItem = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		
-		modelMesherItem.register(particleGenerator_ItemBlock, 0, new ModelResourceLocation(PGenConstants.MODID + ":" + "particleGenerator", "inventory"));
+		renderItem.getItemModelMesher().register(particleGenerator_ItemBlock, 0,
+				new ModelResourceLocation(PGenConstants.MODID + ":" + "particlegenerator", "inventory"));
+		
 	}
 }

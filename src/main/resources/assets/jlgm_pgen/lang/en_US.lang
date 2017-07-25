@@ -1,4 +1,4 @@
-tile.particleGenerator.name=Particle generator
+tile.particlegenerator.name=Particle generator
 
 container.particlegenerator=Particle generator
 container.particlegenerator.arguments=Arguments

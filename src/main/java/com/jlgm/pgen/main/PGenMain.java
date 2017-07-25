@@ -23,20 +23,20 @@ public class PGenMain{
 
 	@SidedProxy(clientSide = PGenConstants.CLIENT_PROXY, serverSide = PGenConstants.SERVER_PROXY)
 	public static PGenCommonProxy proxy;
-	@Instance(PGenConstants.MODID)
+	@Mod.Instance(PGenConstants.MODID)
 	public static PGenMain instance;
 
-	@EventHandler
+	@Mod.EventHandler
 	public static void PreInit(FMLPreInitializationEvent preInitEvent){
 		proxy.preInit(preInitEvent);
 	}
 
-	@EventHandler
+	@Mod.EventHandler
 	public static void Init(FMLInitializationEvent initEvent){
 		proxy.init(initEvent);
 	}
 
-	@EventHandler
+	@Mod.EventHandler
 	public static void PostInit(FMLPostInitializationEvent postInitEvent){
 		proxy.postInit(postInitEvent);
 	}

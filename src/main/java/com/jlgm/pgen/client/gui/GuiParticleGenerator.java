@@ -67,28 +67,28 @@ public class GuiParticleGenerator extends GuiScreen{
 		this.chosedParticle = tile.particleID;
 		this.currentShownParticles = Math.min(this.chosedParticle, numberOfParticles - 5);
 		
-		this.positionX = new GuiTextField(0, this.fontRendererObj, basePointX + 1 + 22, basePointY + 1 + 70, 41, 12);
+		this.positionX = new GuiTextField(0, this.fontRenderer, basePointX + 1 + 22, basePointY + 1 + 70, 41, 12);
 		this.positionX.setText(String.valueOf(tile.x));
         this.positionX.setMaxStringLength(9);
         this.positionX.setEnableBackgroundDrawing(true);
         this.positionX.setFocused(false);
         this.positionX.setCanLoseFocus(true);
         
-		this.positionY = new GuiTextField(1, this.fontRendererObj, basePointX + 1 + 22, basePointY + 1 + 86, 41, 12);
+		this.positionY = new GuiTextField(1, this.fontRenderer, basePointX + 1 + 22, basePointY + 1 + 86, 41, 12);
 		this.positionY.setText(String.valueOf(tile.y));
         this.positionY.setMaxStringLength(9);
         this.positionY.setEnableBackgroundDrawing(true);
         this.positionY.setFocused(false);
         this.positionY.setCanLoseFocus(true);
 		
-		this.positionZ = new GuiTextField(2, this.fontRendererObj, basePointX + 1 + 22, basePointY + 1 + 102, 41, 12);
+		this.positionZ = new GuiTextField(2, this.fontRenderer, basePointX + 1 + 22, basePointY + 1 + 102, 41, 12);
 		this.positionZ.setText(String.valueOf(tile.z));
         this.positionZ.setMaxStringLength(9);
         this.positionZ.setEnableBackgroundDrawing(true);
         this.positionZ.setFocused(false);
         this.positionZ.setCanLoseFocus(true);
 		
-		this.argument1 = new GuiTextField(3, this.fontRendererObj, basePointX + 1 + 84, basePointY + 1 + 86, 77, 12);
+		this.argument1 = new GuiTextField(3, this.fontRenderer, basePointX + 1 + 84, basePointY + 1 + 86, 77, 12);
 		if(chosedParticle == EnumParticleTypes.ITEM_CRACK.getParticleID()){
 			this.argument1.setText(Item.REGISTRY.getNameForObject(Item.getItemById(tile.arg1ID)).toString());
 		}else{
@@ -99,28 +99,28 @@ public class GuiParticleGenerator extends GuiScreen{
         this.argument1.setFocused(false);
         this.argument1.setCanLoseFocus(true);
 		
-		this.argument2 = new GuiTextField(4, this.fontRendererObj, basePointX + 1 + 84, basePointY + 1 + 102, 77, 12);
+		this.argument2 = new GuiTextField(4, this.fontRenderer, basePointX + 1 + 84, basePointY + 1 + 102, 77, 12);
 		this.argument2.setText(String.valueOf(tile.arg2Metadata));
         this.argument2.setMaxStringLength(255);
         this.argument2.setEnableBackgroundDrawing(true);
         this.argument2.setFocused(false);
         this.argument2.setCanLoseFocus(true);
         
-		this.movementX = new GuiTextField(5, this.fontRendererObj, basePointX + 1 + 22, basePointY + 1 + 118, 41, 12);
+		this.movementX = new GuiTextField(5, this.fontRenderer, basePointX + 1 + 22, basePointY + 1 + 118, 41, 12);
 		this.movementX.setText(String.valueOf(tile.vX));
         this.movementX.setMaxStringLength(9);
         this.movementX.setEnableBackgroundDrawing(true);
         this.movementX.setFocused(false);
         this.movementX.setCanLoseFocus(true);
         
-		this.movementY = new GuiTextField(6, this.fontRendererObj, basePointX + 1 + 22, basePointY + 1 + 134, 41, 12);
+		this.movementY = new GuiTextField(6, this.fontRenderer, basePointX + 1 + 22, basePointY + 1 + 134, 41, 12);
 		this.movementY.setText(String.valueOf(tile.vY));
         this.movementY.setMaxStringLength(9);
         this.movementY.setEnableBackgroundDrawing(true);
         this.movementY.setFocused(false);
         this.movementY.setCanLoseFocus(true);
 
-		this.movementZ = new GuiTextField(7, this.fontRendererObj, basePointX + 1 + 22, basePointY + 1 + 150, 41, 12);
+		this.movementZ = new GuiTextField(7, this.fontRenderer, basePointX + 1 + 22, basePointY + 1 + 150, 41, 12);
 		this.movementZ.setText(String.valueOf(tile.vZ));
         this.movementZ.setMaxStringLength(9);
         this.movementZ.setEnableBackgroundDrawing(true);
@@ -160,39 +160,39 @@ public class GuiParticleGenerator extends GuiScreen{
 				this.drawRect(basePointX + 8, basePointY + 18 + (i * 10), basePointX + 19 + 137, basePointY + 19 + 8 + (i * 10), 0xFF002858);
 			}
 			if(EnumParticleTypes.getParticleFromId(currentShownParticles + i).getArgumentCount() > 0){
-				this.fontRendererObj.drawString("!", basePointX + 154, basePointY + 19 + (i * 10), 0xFF0000);
+				this.fontRenderer.drawString("!", basePointX + 154, basePointY + 19 + (i * 10), 0xFF0000);
 			}
 		}
 		
-		this.fontRendererObj.drawString(new TextComponentString(I18n.format(tile.getName())).getUnformattedText(), basePointX + 8, basePointY + 8, 0x404040);
-		this.fontRendererObj.drawString(EnumParticleTypes.getParticleFromId(currentShownParticles + 0).name(), basePointX + 9, basePointY + 19 + 00, 0xFFFFFF);
-		this.fontRendererObj.drawString(EnumParticleTypes.getParticleFromId(currentShownParticles + 1).name(), basePointX + 9, basePointY + 19 + 10, 0xFFFFFF);
-		this.fontRendererObj.drawString(EnumParticleTypes.getParticleFromId(currentShownParticles + 2).name(), basePointX + 9, basePointY + 19 + 20, 0xFFFFFF);
-		this.fontRendererObj.drawString(EnumParticleTypes.getParticleFromId(currentShownParticles + 3).name(), basePointX + 9, basePointY + 19 + 30, 0xFFFFFF);
-		this.fontRendererObj.drawString(EnumParticleTypes.getParticleFromId(currentShownParticles + 4).name(), basePointX + 9, basePointY + 19 + 40, 0xFFFFFF);
+		this.fontRenderer.drawString(new TextComponentString(I18n.format(tile.getName())).getUnformattedText(), basePointX + 8, basePointY + 8, 0x404040);
+		this.fontRenderer.drawString(EnumParticleTypes.getParticleFromId(currentShownParticles + 0).name(), basePointX + 9, basePointY + 19 + 00, 0xFFFFFF);
+		this.fontRenderer.drawString(EnumParticleTypes.getParticleFromId(currentShownParticles + 1).name(), basePointX + 9, basePointY + 19 + 10, 0xFFFFFF);
+		this.fontRenderer.drawString(EnumParticleTypes.getParticleFromId(currentShownParticles + 2).name(), basePointX + 9, basePointY + 19 + 20, 0xFFFFFF);
+		this.fontRenderer.drawString(EnumParticleTypes.getParticleFromId(currentShownParticles + 3).name(), basePointX + 9, basePointY + 19 + 30, 0xFFFFFF);
+		this.fontRenderer.drawString(EnumParticleTypes.getParticleFromId(currentShownParticles + 4).name(), basePointX + 9, basePointY + 19 + 40, 0xFFFFFF);
 		
 		this.positionX.drawTextBox();
 		this.positionY.drawTextBox();
 		this.positionZ.drawTextBox();
-		this.fontRendererObj.drawString("X:", basePointX + 13, basePointY + 73, 0x404040);
-		this.fontRendererObj.drawString("Y:", basePointX + 13, basePointY + 89, 0x404040);
-		this.fontRendererObj.drawString("Z:", basePointX + 13, basePointY + 105, 0x404040);
+		this.fontRenderer.drawString("X:", basePointX + 13, basePointY + 73, 0x404040);
+		this.fontRenderer.drawString("Y:", basePointX + 13, basePointY + 89, 0x404040);
+		this.fontRenderer.drawString("Z:", basePointX + 13, basePointY + 105, 0x404040);
 		
 		this.argument1.setEnabled(EnumParticleTypes.getParticleFromId(chosedParticle).getArgumentCount() > 0);
 		this.argument2.setEnabled(EnumParticleTypes.getParticleFromId(chosedParticle).getArgumentCount() > 0);
 		this.argument1.drawTextBox();
 		this.argument2.drawTextBox();
 		
-		this.fontRendererObj.drawString(new TextComponentString(I18n.format("container.particlegenerator.arguments")).getUnformattedText() + ":", basePointX + 69, basePointY + 73, 0x404040);
-		this.fontRendererObj.drawString("�1:", basePointX + 69, basePointY + 89, 0x404040);
-		this.fontRendererObj.drawString("�2:", basePointX + 69, basePointY + 105, 0x404040);
+		this.fontRenderer.drawString(new TextComponentString(I18n.format("container.particlegenerator.arguments")).getUnformattedText() + ":", basePointX + 69, basePointY + 73, 0x404040);
+		this.fontRenderer.drawString("�1:", basePointX + 69, basePointY + 89, 0x404040);
+		this.fontRenderer.drawString("�2:", basePointX + 69, basePointY + 105, 0x404040);
 		
 		this.movementX.drawTextBox();
 		this.movementY.drawTextBox();
 		this.movementZ.drawTextBox();
-		this.fontRendererObj.drawString("vX:", basePointX + 7, basePointY + 121, 0x404040);
-		this.fontRendererObj.drawString("vY:", basePointX + 7, basePointY + 137, 0x404040);
-		this.fontRendererObj.drawString("vZ:", basePointX + 7, basePointY + 153, 0x404040);
+		this.fontRenderer.drawString("vX:", basePointX + 7, basePointY + 121, 0x404040);
+		this.fontRenderer.drawString("vY:", basePointX + 7, basePointY + 137, 0x404040);
+		this.fontRenderer.drawString("vZ:", basePointX + 7, basePointY + 153, 0x404040);
 		
 		float r;
 		
@@ -233,7 +233,7 @@ public class GuiParticleGenerator extends GuiScreen{
 		isIDValid = EnumParticleTypes.getParticleFromId(chosedParticle).getArgumentCount() > 0? isIDValid : true;
 		
 		if(!isIDValid){
-			this.fontRendererObj.drawString("!", basePointX + 167, basePointY + 89, 0xFF0000);
+			this.fontRenderer.drawString("!", basePointX + 167, basePointY + 89, 0xFF0000);
 		}
 				
 		super.drawScreen(mouseX, mouseY, partialTicks);
