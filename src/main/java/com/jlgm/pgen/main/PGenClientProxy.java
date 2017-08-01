@@ -1,6 +1,7 @@
 package com.jlgm.pgen.main;
 
 import com.jlgm.pgen.block.PGenBlock;
+import com.jlgm.pgen.item.PGenItem;
 import com.jlgm.pgen.lib.PGenVersionChecker;
 import com.jlgm.pgen.tileentity.PGenTileEntity;
 
@@ -19,6 +20,7 @@ public class PGenClientProxy extends PGenCommonProxy{
 	public void init(FMLInitializationEvent initEvent){
 		super.init(initEvent);
 		PGenBlock.renderBlock();
+		PGenItem.renderItem();
 	}
 
 	@Override

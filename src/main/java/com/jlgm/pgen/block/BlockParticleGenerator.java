@@ -1,8 +1,7 @@
 package com.jlgm.pgen.block;
 
-import javax.annotation.Nullable;
-
 import com.jlgm.pgen.client.gui.PGenGuiHandler;
+import com.jlgm.pgen.item.ItemCoordSaver;
 import com.jlgm.pgen.main.PGenMain;
 import com.jlgm.pgen.tileentity.TileEntityParticleGenerator;
 
@@ -10,7 +9,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -28,7 +26,9 @@ public class BlockParticleGenerator extends BlockContainer{
 	
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ){
 		if(worldIn.isRemote){
-			playerIn.openGui(PGenMain.instance, PGenGuiHandler.GUI_ID, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			if(!(playerIn.getHeldItem(hand).getItem() instanceof ItemCoordSaver)){
+				playerIn.openGui(PGenMain.instance, PGenGuiHandler.GUI_ID, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			}
 		}
         return true;
     }

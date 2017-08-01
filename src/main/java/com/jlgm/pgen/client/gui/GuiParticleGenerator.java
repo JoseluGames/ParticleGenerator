@@ -61,8 +61,8 @@ public class GuiParticleGenerator extends GuiScreen{
 		int basePointX = this.width/2 - textureWidth/2;
 		int basePointY = this.height/2 - textureHeight/2;
 		
-		this.buttonList.add(this.doneButton = new GuiButton(0, basePointX + 113, basePointY + 118, 50, 20, new TextComponentString(I18n.format("gui.done")).getUnformattedText()));
-		this.buttonList.add(this.cancelButton = new GuiButton(1, basePointX + 113, basePointY + 144, 50, 20, new TextComponentString(I18n.format("gui.cancel")).getUnformattedText()));
+		this.buttonList.add(this.doneButton = new GuiButton(0, basePointX + 113 + 6, basePointY + 118, 50, 20, new TextComponentString(I18n.format("gui.done")).getUnformattedText()));
+		this.buttonList.add(this.cancelButton = new GuiButton(1, basePointX + 113 + 6, basePointY + 144, 50, 20, new TextComponentString(I18n.format("gui.cancel")).getUnformattedText()));
 		
 		this.chosedParticle = tile.particleID;
 		this.currentShownParticles = Math.min(this.chosedParticle, numberOfParticles - 5);
@@ -88,7 +88,7 @@ public class GuiParticleGenerator extends GuiScreen{
         this.positionZ.setFocused(false);
         this.positionZ.setCanLoseFocus(true);
 		
-		this.argument1 = new GuiTextField(3, this.fontRenderer, basePointX + 1 + 84, basePointY + 1 + 86, 77, 12);
+		this.argument1 = new GuiTextField(3, this.fontRenderer, basePointX + 1 + 90, basePointY + 1 + 86, 77, 12);
 		if(chosedParticle == EnumParticleTypes.ITEM_CRACK.getParticleID()){
 			this.argument1.setText(Item.REGISTRY.getNameForObject(Item.getItemById(tile.arg1ID)).toString());
 		}else{
@@ -99,7 +99,7 @@ public class GuiParticleGenerator extends GuiScreen{
         this.argument1.setFocused(false);
         this.argument1.setCanLoseFocus(true);
 		
-		this.argument2 = new GuiTextField(4, this.fontRenderer, basePointX + 1 + 84, basePointY + 1 + 102, 77, 12);
+		this.argument2 = new GuiTextField(4, this.fontRenderer, basePointX + 1 + 90, basePointY + 1 + 102, 77, 12);
 		this.argument2.setText(String.valueOf(tile.arg2Metadata));
         this.argument2.setMaxStringLength(255);
         this.argument2.setEnableBackgroundDrawing(true);
@@ -183,9 +183,9 @@ public class GuiParticleGenerator extends GuiScreen{
 		this.argument1.drawTextBox();
 		this.argument2.drawTextBox();
 		
-		this.fontRenderer.drawString(new TextComponentString(I18n.format("container.particlegenerator.arguments")).getUnformattedText() + ":", basePointX + 69, basePointY + 73, 0x404040);
-		this.fontRenderer.drawString("·1:", basePointX + 69, basePointY + 89, 0x404040);
-		this.fontRenderer.drawString("·2:", basePointX + 69, basePointY + 105, 0x404040);
+		this.fontRenderer.drawString(new TextComponentString(I18n.format("container.particlegenerator.arguments")).getUnformattedText() + ":", basePointX + 75, basePointY + 73, 0x404040);
+		this.fontRenderer.drawString("1:", basePointX + 81, basePointY + 89, 0x404040);
+		this.fontRenderer.drawString("2:", basePointX + 81, basePointY + 105, 0x404040);
 		
 		this.movementX.drawTextBox();
 		this.movementY.drawTextBox();
@@ -482,7 +482,7 @@ public class GuiParticleGenerator extends GuiScreen{
 			
 			int arg2Metadata = Integer.valueOf((this.argument2.getText().isEmpty()?"0":this.argument2.getText()));
 			
-			PGenPacketHandler.INSTANCE.sendToServer(new ParticleGeneratorMessage(tile.getPos(), particleID, x, y, z, vX, vY, vZ, arg1ID, arg2Metadata));
+			PGenPacketHandler.INSTANCE.sendToServer(new ParticleGeneratorMessage(false, tile.getPos(), particleID, x, y, z, vX, vY, vZ, arg1ID, arg2Metadata));
 			
 			tile.particleID = particleID;
 			tile.x = x;

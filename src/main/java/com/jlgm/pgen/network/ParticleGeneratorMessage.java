@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class ParticleGeneratorMessage implements IMessage{
 	
+	private boolean onlyPos;
 	private BlockPos pos;
 	private int particleID, arg1ID, arg2Metadata;
 	private float x, y, z, vX, vY, vZ;
@@ -21,7 +22,8 @@ public class ParticleGeneratorMessage implements IMessage{
 		
 	}
 	
-	public ParticleGeneratorMessage(BlockPos pos, int particleID, float x, float y, float z, float vX, float vY, float vZ, int arg1ID, int arg2Metadata){
+	public ParticleGeneratorMessage(boolean onlyPos, BlockPos pos, int particleID, float x, float y, float z, float vX, float vY, float vZ, int arg1ID, int arg2Metadata){
+		this.onlyPos = onlyPos;
 		this.pos = pos;
 		this.particleID = particleID;
 		this.x = x;
@@ -37,6 +39,7 @@ public class ParticleGeneratorMessage implements IMessage{
 
 	@Override
 	public void toBytes(ByteBuf buf) {
+		buf.writeBoolean(onlyPos);
 		buf.writeLong(pos.toLong());
 		buf.writeInt(particleID);
 		buf.writeFloat(x);
@@ -51,6 +54,7 @@ public class ParticleGeneratorMessage implements IMessage{
 	
 	@Override
 	public void fromBytes(ByteBuf buf) {
+		onlyPos = buf.readBoolean();
 		pos = BlockPos.fromLong(buf.readLong());
 		particleID = buf.readInt();
 		x = buf.readFloat();
@@ -70,16 +74,21 @@ public class ParticleGeneratorMessage implements IMessage{
 			TileEntity tile = ctx.getServerHandler().player.world.getTileEntity(message.pos);
 			if(tile instanceof TileEntityParticleGenerator){
 				TileEntityParticleGenerator pgen = (TileEntityParticleGenerator) tile;
-				pgen.particleID = message.particleID;
-				pgen.x = message.x;
-				pgen.y = message.y;
-				pgen.z = message.z;
-				pgen.vX = message.vX;
-				pgen.vY = message.vY;
-				pgen.vZ = message.vZ;
-				pgen.arg1ID = message.arg1ID;
-				pgen.arg2Metadata = message.arg2Metadata;
-				
+				if(message.onlyPos){
+					pgen.x = message.x;
+					pgen.y = message.y;
+					pgen.z = message.z;
+				} else {
+					pgen.particleID = message.particleID;
+					pgen.x = message.x;
+					pgen.y = message.y;
+					pgen.z = message.z;
+					pgen.vX = message.vX;
+					pgen.vY = message.vY;
+					pgen.vZ = message.vZ;
+					pgen.arg1ID = message.arg1ID;
+					pgen.arg2Metadata = message.arg2Metadata;
+				}
 				pgen.markDirty();
 			}
 			return null;

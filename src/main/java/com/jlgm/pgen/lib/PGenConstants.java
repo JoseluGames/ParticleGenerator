@@ -9,7 +9,7 @@ public class PGenConstants{
 	//Version parts ( https://mcforge.readthedocs.io/en/latest/conventions/versioning/ )
 	public static final String MCVERSION = "1.12";
 	public static final String MAJOR = "2";
-	public static final String MINOR = "0";
+	public static final String MINOR = "1";
 	public static final String PATCH = "0";
 	public static final String RELEASETYPE = "";
 	

@@ -1,6 +1,7 @@
-tile.particlegenerator.name=Generador de particulas
+tile.particlegenerator.name=Generador de Particulas
+item.coordsaver.name=Guarda-Coordenadas
 
-container.particlegenerator=Generador de particulas
+container.particlegenerator=Generador de Particulas
 container.particlegenerator.arguments=Argumentos
 
 container.particlegenerator.example=Por ejemplo:
@@ -18,9 +19,14 @@ container.particlegenerator.tip2.line5=0.0-1.0.
 container.particlegenerator.tip3_1.line1=ID del item
 container.particlegenerator.tip3_2.line1=ID del bloque
 
-
 container.particlegenerator.tip4_1.line1=Metadatos del item
 container.particlegenerator.tip4_2.line1=Metadatos del bloque
 
 container.particlegenerator.tip5.line1=¡Cuidado!
 container.particlegenerator.tip5.line2=Esta particula necesita argumentos.
+
+item.coordsaver.click1=Click derecho para guardar la posicion centrada.
+item.coordsaver.click2=Shift y click derecho para guardar la posicion clickada.
+item.coordsaver.click3=Shift y click derecho para guardar la posicion en un Generador de Particulas.
+item.coordsaver.posstored=Posicion guardada
+item.coordsaver.pospasted=Posicion pegada.

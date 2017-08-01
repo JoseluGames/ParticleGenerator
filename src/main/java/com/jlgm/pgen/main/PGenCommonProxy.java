@@ -3,6 +3,7 @@ package com.jlgm.pgen.main;
 import com.jlgm.pgen.block.PGenBlock;
 import com.jlgm.pgen.client.gui.PGenGuiHandler;
 import com.jlgm.pgen.event.PGenEventHandler;
+import com.jlgm.pgen.item.PGenItem;
 import com.jlgm.pgen.network.PGenPacketHandler;
 import com.jlgm.pgen.tileentity.PGenTileEntity;
 
@@ -33,6 +34,7 @@ public class PGenCommonProxy{
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event){
 		PGenBlock.registerItemBlocks(event);
+		PGenItem.registerItems(event);
 	}
 	
 
