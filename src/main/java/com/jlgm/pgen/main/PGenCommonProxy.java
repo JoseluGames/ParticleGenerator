@@ -2,14 +2,12 @@ package com.jlgm.pgen.main;
 
 import com.jlgm.pgen.block.PGenBlock;
 import com.jlgm.pgen.client.gui.PGenGuiHandler;
-import com.jlgm.pgen.event.PGenEventHandler;
 import com.jlgm.pgen.item.PGenItem;
 import com.jlgm.pgen.network.PGenPacketHandler;
 import com.jlgm.pgen.tileentity.PGenTileEntity;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -40,7 +38,6 @@ public class PGenCommonProxy{
 
 	public void init(FMLInitializationEvent initEvent){
 		NetworkRegistry.INSTANCE.registerGuiHandler(PGenMain.instance, new PGenGuiHandler());
-		MinecraftForge.EVENT_BUS.register(new PGenEventHandler());
 	}
 
 	public void postInit(FMLPostInitializationEvent postInitEvent){
