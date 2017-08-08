@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "1.12-2.1.0"
+version = "1.12.1-2.1.0"
 group= "com.jlgm.pgen" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "jlgm_pgen"
 
@@ -21,7 +21,7 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12-14.21.0.2343"
+    version = "1.12.1-14.22.0.2446"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
@@ -61,13 +61,14 @@ processResources {
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
+	inputs.property "modid", project.archivesBaseName
 
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
                 
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version':project.version, 'mcversion':project.minecraft.version, 'modid':project.archivesBaseName
     }
         
     // copy everything else except the mcmod.info
