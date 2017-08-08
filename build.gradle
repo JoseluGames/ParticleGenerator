@@ -61,14 +61,13 @@ processResources {
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
-	inputs.property "modid", project.archivesBaseName
 
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
                 
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version, 'modid':project.archivesBaseName
+        expand 'version':project.version, 'mcversion':project.minecraft.version
     }
         
     // copy everything else except the mcmod.info
