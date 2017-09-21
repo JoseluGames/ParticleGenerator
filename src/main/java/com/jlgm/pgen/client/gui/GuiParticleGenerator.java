@@ -49,9 +49,9 @@ public class GuiParticleGenerator extends GuiScreen{
 	private int chosedParticle = 0;
 	private boolean relativeCoords = false;
 	
-	public GuiParticleGenerator(TileEntityParticleGenerator chatBox){
+	public GuiParticleGenerator(TileEntityParticleGenerator particleGenerator){
 		texture = new ResourceLocation(PGenConstants.MODID + ":" + "textures/gui/particleGenerator.png");
-		tile = chatBox;
+		tile = particleGenerator;
 	}
 	
 	@Override
