@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" R ",
+		"CSC",
+		" C "
+	],
+	"key": {
+		"C": {
+			"item": "minecraft:cobblestone"
+		},
+		"R": {
+			"item": "minecraft:redstone"
+		},
+		"S": {
+			"item": "minecraft:compass"
+		}
+	},
+	"result": {
+		"item": "coordsaver"
+	}
+}
