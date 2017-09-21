@@ -22,8 +22,10 @@ container.particlegenerator.tip3_2.line1=ID del bloque
 container.particlegenerator.tip4_1.line1=Metadatos del item
 container.particlegenerator.tip4_2.line1=Metadatos del bloque
 
-container.particlegenerator.tip5.line1=¡Cuidado!
-container.particlegenerator.tip5.line2=Esta particula necesita argumentos.
+container.particlegenerator.warning.warning=¡Cuidado!
+container.particlegenerator.warning.arguments=Esta particula necesita argumentos.
+container.particlegenerator.warning.relative1=Las coordenadas son
+container.particlegenerator.warning.relative2=relativas al bloque.
 
 item.coordsaver.click1=Click derecho para guardar la posicion centrada.
 item.coordsaver.click2=Shift y click derecho para guardar la posicion clickada.

@@ -1,5 +1,6 @@
 package com.jlgm.pgen.main;
 
+import com.jlgm.pgen.lib.PGenConfigStorage;
 import com.jlgm.pgen.lib.PGenConstants;
 
 import net.minecraftforge.fml.common.Mod;
@@ -20,9 +21,12 @@ public class PGenMain{
 	public static PGenCommonProxy proxy;
 	@Mod.Instance(PGenConstants.MODID)
 	public static PGenMain instance;
+	
+	public static PGenConfigStorage configStorage;
 
 	@Mod.EventHandler
 	public static void PreInit(FMLPreInitializationEvent preInitEvent){
+		configStorage = new PGenConfigStorage();
 		proxy.preInit(preInitEvent);
 	}
 

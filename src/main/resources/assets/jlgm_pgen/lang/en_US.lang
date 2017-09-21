@@ -22,8 +22,10 @@ container.particlegenerator.tip3_2.line1=Block ID
 container.particlegenerator.tip4_1.line1=Item metadata
 container.particlegenerator.tip4_2.line1=Block metadata
 
-container.particlegenerator.tip5.line1=Warning!
-container.particlegenerator.tip5.line2=This particle takes arguments.
+container.particlegenerator.warning.warning=Warning!
+container.particlegenerator.warning.arguments=This particle takes arguments.
+container.particlegenerator.warning.relative1=The coordinates are
+container.particlegenerator.warning.relative2=relative to the block.
 
 item.coordsaver.click1=Right-click to save center pos.
 item.coordsaver.click2=Shift right-click to save hit pos.

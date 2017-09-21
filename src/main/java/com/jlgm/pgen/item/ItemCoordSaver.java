@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.jlgm.pgen.lib.Vec3f;
+import com.jlgm.pgen.main.PGenMain;
 import com.jlgm.pgen.network.PGenPacketHandler;
 import com.jlgm.pgen.network.ParticleGeneratorMessage;
 import com.jlgm.pgen.tileentity.TileEntityParticleGenerator;
@@ -41,12 +42,18 @@ public class ItemCoordSaver extends Item {
 	 * Called when a Block is right-clicked with this Item
 	 */
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		boolean relativeCoords = PGenMain.instance.configStorage.relativeCoords;
 		if (worldIn.getTileEntity(pos) instanceof TileEntityParticleGenerator) {
 			TileEntityParticleGenerator tileEntity = (TileEntityParticleGenerator) worldIn.getTileEntity(pos);
-			PGenPacketHandler.INSTANCE.sendToServer(new ParticleGeneratorMessage(true, tileEntity.getPos(), 0, posStored.x, posStored.y, posStored.z, 0, 0, 0, 0, 0));
-			tileEntity.x = posStored.x;
-			tileEntity.y = posStored.y;
-			tileEntity.z = posStored.z;
+			
+			Vec3f relPosStored = posStored.subtract(new Vec3f(pos.getX(), pos.getY(), pos.getZ()));
+			
+			Vec3f finalPos = relativeCoords ? relPosStored : posStored;
+			
+			PGenPacketHandler.INSTANCE.sendToServer(new ParticleGeneratorMessage(true, tileEntity.getPos(), 0, finalPos.x, finalPos.y, finalPos.z, 0, 0, 0, 0, 0));
+			tileEntity.x = finalPos.x;
+			tileEntity.y = finalPos.y;
+			tileEntity.z = finalPos.z;
 			player.sendStatusMessage(new TextComponentTranslation("item.coordsaver.pospasted", new Object[0]), true);
 			return EnumActionResult.SUCCESS;
 		} else {
@@ -66,21 +73,27 @@ public class ItemCoordSaver extends Item {
 				z = Float.valueOf(df.format(pos.getZ() + 0.5f));
 				posStored = new Vec3f(x, y, z);
 			}
-			player.sendStatusMessage(new TextComponentTranslation("item.coordsaver.posstored", new Object[0]).appendSibling(new TextComponentString(" = X:" + posStored.x + " Y:" + posStored.y + " Z:" + posStored.z)), true);
+			if(!relativeCoords) {
+				player.sendStatusMessage(new TextComponentTranslation("item.coordsaver.posstored", new Object[0]).appendSibling(new TextComponentString(" = X:" + posStored.x + " Y:" + posStored.y + " Z:" + posStored.z)), true);	
+			} else {
+				player.sendStatusMessage(new TextComponentTranslation("item.coordsaver.posstored", new Object[0]).appendSibling(new TextComponentString(".")), true);
+			}
 			return EnumActionResult.SUCCESS;
 		}
 	}
 	
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-    {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(I18n.translateToLocal("item.coordsaver.click1"));
-        tooltip.add(I18n.translateToLocal("item.coordsaver.click2"));
-        tooltip.add(I18n.translateToLocal("item.coordsaver.click3"));
-        tooltip.add(I18n.translateToLocal("item.coordsaver.posstored") + ": ");
-        tooltip.add(" X: " + TextFormatting.BLUE + posStored.x);
-        tooltip.add(" Y: " + TextFormatting.BLUE + posStored.y);
-        tooltip.add(" Z: " + TextFormatting.BLUE + posStored.z);
-    }
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn){
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+		boolean relativeCoords = PGenMain.instance.configStorage.relativeCoords;
+		tooltip.add(I18n.translateToLocal("item.coordsaver.click1"));
+		tooltip.add(I18n.translateToLocal("item.coordsaver.click2"));
+		tooltip.add(I18n.translateToLocal("item.coordsaver.click3"));
+		tooltip.add(TextFormatting.GOLD + I18n.translateToLocal("item.coordsaver.posstored") + (relativeCoords ? "." : ": "));
+		if(!PGenMain.instance.configStorage.relativeCoords) {
+			tooltip.add(" X: " + TextFormatting.BLUE + posStored.x);
+			tooltip.add(" Y: " + TextFormatting.BLUE + posStored.y);
+			tooltip.add(" Z: " + TextFormatting.BLUE + posStored.z);
+		}
+	}
 }

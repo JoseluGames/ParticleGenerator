@@ -10,6 +10,7 @@ import org.lwjgl.input.Mouse;
 import com.google.common.collect.Lists;
 import com.jlgm.pgen.lib.PGenConstants;
 import com.jlgm.pgen.lib.PGenMath;
+import com.jlgm.pgen.main.PGenMain;
 import com.jlgm.pgen.network.PGenPacketHandler;
 import com.jlgm.pgen.network.ParticleGeneratorMessage;
 import com.jlgm.pgen.tileentity.TileEntityParticleGenerator;
@@ -43,15 +44,16 @@ public class GuiParticleGenerator extends GuiScreen{
 	private static ResourceLocation texture;
 	private final TileEntityParticleGenerator tile;
 	private final int numberOfParticles = 47;
-	private int currentShownParticles = 0; //Max 42;
+	private int currentShownParticles = 0; //Max = numberOfParticles - 5 (Vanilla : 42);
 	private int textureWidth = 176;
-	private int textureHeight = 176; //Old 222
+	private int textureHeight = 176;
 	private int chosedParticle = 0;
 	private boolean relativeCoords = false;
 	
 	public GuiParticleGenerator(TileEntityParticleGenerator particleGenerator){
 		texture = new ResourceLocation(PGenConstants.MODID + ":" + "textures/gui/particleGenerator.png");
 		tile = particleGenerator;
+		relativeCoords = PGenMain.instance.configStorage.relativeCoords;
 	}
 	
 	@Override
@@ -174,9 +176,9 @@ public class GuiParticleGenerator extends GuiScreen{
 		this.positionX.drawTextBox();
 		this.positionY.drawTextBox();
 		this.positionZ.drawTextBox();
-		this.fontRenderer.drawString("X:", basePointX + 13, basePointY + 73, 0x404040);
-		this.fontRenderer.drawString("Y:", basePointX + 13, basePointY + 89, 0x404040);
-		this.fontRenderer.drawString("Z:", basePointX + 13, basePointY + 105, 0x404040);
+		this.fontRenderer.drawString(relativeCoords?"~X:":"X:", basePointX + 13 + (relativeCoords?-7:0), basePointY + 73, 0x404040);
+		this.fontRenderer.drawString(relativeCoords?"~Y:":"Y:", basePointX + 13 + (relativeCoords?-7:0), basePointY + 89, 0x404040);
+		this.fontRenderer.drawString(relativeCoords?"~Z:":"Z:", basePointX + 13 + (relativeCoords?-7:0), basePointY + 105, 0x404040);
 		
 		this.argument1.setEnabled(EnumParticleTypes.getParticleFromId(chosedParticle).getArgumentCount() > 0);
 		this.argument2.setEnabled(EnumParticleTypes.getParticleFromId(chosedParticle).getArgumentCount() > 0);
@@ -296,16 +298,27 @@ public class GuiParticleGenerator extends GuiScreen{
 			}
 		}
 		
-		//Tool tip 5
+		//Arguments Warning
 		for(int i = 0; i < 5; i++){
 			if(PGenMath.isInRange(mouseX, mouseY, basePointX + 7, basePointX + 156, basePointY + 16 + (i * 10), basePointY + 27 + (i * 10))){
 				if(EnumParticleTypes.getParticleFromId(currentShownParticles + i).getArgumentCount() > 0){
 					List<String> list = Lists.<String>newArrayList();
 					list.add(TextFormatting.WHITE + EnumParticleTypes.getParticleFromId(currentShownParticles + i).name());
-					list.add(TextFormatting.GOLD + new TextComponentString(I18n.format("container.particlegenerator.tip5.line1")).getUnformattedText());
-					list.add(TextFormatting.GRAY + new TextComponentString(I18n.format("container.particlegenerator.tip5.line2")).getUnformattedText());
+					list.add(TextFormatting.GOLD + new TextComponentString(I18n.format("container.particlegenerator.warning.warning")).getUnformattedText());
+					list.add(TextFormatting.GRAY + new TextComponentString(I18n.format("container.particlegenerator.warning.arguments")).getUnformattedText());
 					this.drawHoveringText(list, mouseX, mouseY);
 				}
+			}
+		}
+		
+		//Relative Coords Warning
+		if(relativeCoords) {
+			if(PGenMath.isInRange(mouseX, mouseY, basePointX + 5, basePointX + 65, basePointY + 69, basePointY + 117)) {
+				List<String> list = Lists.<String>newArrayList();
+				list.add(TextFormatting.GOLD + new TextComponentString(I18n.format("container.particlegenerator.warning.warning")).getUnformattedText());
+				list.add(TextFormatting.GRAY + new TextComponentString(I18n.format("container.particlegenerator.warning.relative1")).getUnformattedText());
+				list.add(TextFormatting.GRAY + new TextComponentString(I18n.format("container.particlegenerator.warning.relative2")).getUnformattedText());
+				this.drawHoveringText(list, mouseX, mouseY);
 			}
 		}
 	}

@@ -2,6 +2,8 @@ package com.jlgm.pgen.tileentity;
 
 import javax.annotation.Nullable;
 
+import com.jlgm.pgen.main.PGenMain;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,6 +21,9 @@ public class TileEntityParticleGenerator extends TileEntity implements ITickable
 	public float x = 0;
 	public float y = 0;
 	public float z = 0;
+	public float finalX = 0;
+	public float finalY = 0;
+	public float finalZ = 0;
 	public float vX = 0;
 	public float vY = 0;
 	public float vZ = 0;
@@ -29,12 +34,21 @@ public class TileEntityParticleGenerator extends TileEntity implements ITickable
 	public void update() {
 		if(this.world.isRemote){
 			if(this.world.isBlockPowered(this.getPos())){
+				if(PGenMain.instance.configStorage.relativeCoords) {
+					finalX = this.getPos().getX() + x;
+					finalY = this.getPos().getY() + y;
+					finalZ = this.getPos().getZ() + z;
+				} else {
+					finalX = x;
+					finalY = y;
+					finalZ = z;
+				}
 				if(particleID == EnumParticleTypes.ITEM_CRACK.getParticleID()){
-					this.world.spawnParticle(EnumParticleTypes.getParticleFromId(particleID), x, y, z, vX, vY, vZ, new int[]{arg1ID, arg2Metadata});
+					this.world.spawnParticle(EnumParticleTypes.getParticleFromId(particleID), finalX, finalY, finalZ, vX, vY, vZ, new int[]{arg1ID, arg2Metadata});
 				}else if(particleID == EnumParticleTypes.BLOCK_CRACK.getParticleID() || particleID == EnumParticleTypes.BLOCK_DUST.getParticleID() || particleID == EnumParticleTypes.FALLING_DUST.getParticleID()){
-					this.world.spawnParticle(EnumParticleTypes.getParticleFromId(particleID), x, y, z, vX, vY, vZ, new int[]{Block.getStateId(Block.getBlockById(arg1ID).getStateFromMeta(arg2Metadata))});
+					this.world.spawnParticle(EnumParticleTypes.getParticleFromId(particleID), finalX, finalY, finalZ, vX, vY, vZ, new int[]{Block.getStateId(Block.getBlockById(arg1ID).getStateFromMeta(arg2Metadata))});
 				}else{
-					this.world.spawnParticle(EnumParticleTypes.getParticleFromId(particleID), x, y, z, vX, vY, vZ);
+					this.world.spawnParticle(EnumParticleTypes.getParticleFromId(particleID), finalX, finalY, finalZ, vX, vY, vZ);
 				}
 			}
 		}
