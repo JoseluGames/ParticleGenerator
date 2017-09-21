@@ -8,7 +8,7 @@ container.particlegenerator.example=For example:
 
 container.particlegenerator.tip1_1.line1=This cannot
 container.particlegenerator.tip1_1.line2=be empty.
-container.particlegenerator.tip1_2.line1=is not a valid ID!
+container.particlegenerator.tip1_2.line1=Is not a valid ID!
 
 container.particlegenerator.tip2.line1=Particle color
 container.particlegenerator.tip2.line2=Some particles use

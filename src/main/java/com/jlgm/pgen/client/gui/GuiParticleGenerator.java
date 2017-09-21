@@ -235,13 +235,13 @@ public class GuiParticleGenerator extends GuiScreen{
 		isIDValid = EnumParticleTypes.getParticleFromId(chosedParticle).getArgumentCount() > 0? isIDValid : true;
 		
 		if(!isIDValid){
-			this.fontRenderer.drawString("!", basePointX + 167, basePointY + 89, 0xFF0000);
+			this.fontRenderer.drawString("!", basePointX + 166, basePointY + 89, 0xFF0000);
 		}
 				
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		
 		//Tool tip 1
-		if(PGenMath.isInRange(mouseX, mouseY, basePointX + 162, basePointX + 173, basePointY + 86, basePointY + 101)){
+		if(PGenMath.isInRange(mouseX, mouseY, basePointX + 159, basePointX + 170, basePointY + 86, basePointY + 101)){
 			List<String> list = Lists.<String>newArrayList();
 			if(this.argument1.getText().isEmpty() && EnumParticleTypes.getParticleFromId(chosedParticle).getArgumentCount() > 0){
 				list.add(TextFormatting.GOLD + new TextComponentString(I18n.format("container.particlegenerator.tip1_1.line1")).getUnformattedText());
@@ -404,7 +404,11 @@ public class GuiParticleGenerator extends GuiScreen{
     protected void keyTyped(char typedChar, int keyCode) throws IOException{
     	super.keyTyped(typedChar, keyCode);
     	this.argument1.textboxKeyTyped(typedChar, keyCode);
-    	this.argument2.textboxKeyTyped(typedChar, keyCode);
+    	
+    	if(Character.isDigit(typedChar) || Character.isISOControl(typedChar)) {
+        	this.argument2.textboxKeyTyped(typedChar, keyCode);
+    	}
+    	
     	if(Character.isDigit(typedChar) || Character.isISOControl(typedChar) || typedChar == '.' || typedChar == '-' || typedChar == '+' || typedChar == '~'){
         	this.positionX.textboxKeyTyped(typedChar, keyCode);
         	this.positionY.textboxKeyTyped(typedChar, keyCode);
