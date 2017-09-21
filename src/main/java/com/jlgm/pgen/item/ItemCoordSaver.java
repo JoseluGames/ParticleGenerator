@@ -17,6 +17,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -45,6 +46,26 @@ public class ItemCoordSaver extends Item {
 		boolean relativeCoords = PGenMain.instance.configStorage.relativeCoords;
 		if (worldIn.getTileEntity(pos) instanceof TileEntityParticleGenerator) {
 			TileEntityParticleGenerator tileEntity = (TileEntityParticleGenerator) worldIn.getTileEntity(pos);
+
+			NBTTagCompound nbt;
+			ItemStack stack = player.getHeldItem(hand);
+			float storedX = 0;
+			float storedY = 0;
+			float storedZ = 0;
+			
+			if(stack.hasTagCompound()) {
+				nbt = stack.getTagCompound();
+				if(nbt.hasKey("PositionX"))
+					storedX = stack.getTagCompound().getFloat("PositionX");
+
+				if(nbt.hasKey("PositionY"))
+					storedY = stack.getTagCompound().getFloat("PositionY");
+
+				if(nbt.hasKey("PositionZ"))
+					storedZ = stack.getTagCompound().getFloat("PositionZ");
+			}
+			
+			posStored = new Vec3f(storedX, storedY, storedZ);
 			
 			Vec3f relPosStored = posStored.subtract(new Vec3f(pos.getX(), pos.getY(), pos.getZ()));
 			
@@ -55,6 +76,7 @@ public class ItemCoordSaver extends Item {
 			tileEntity.y = finalPos.y;
 			tileEntity.z = finalPos.z;
 			player.sendStatusMessage(new TextComponentTranslation("item.coordsaver.pospasted", new Object[0]), true);
+			
 			return EnumActionResult.SUCCESS;
 		} else {
 			DecimalFormat df = new DecimalFormat("#.###");
@@ -78,6 +100,21 @@ public class ItemCoordSaver extends Item {
 			} else {
 				player.sendStatusMessage(new TextComponentTranslation("item.coordsaver.posstored", new Object[0]).appendSibling(new TextComponentString(".")), true);
 			}
+			
+			NBTTagCompound nbt;
+			ItemStack stack = player.getHeldItem(hand);
+			if(stack.hasTagCompound()) {
+				nbt = stack.getTagCompound();
+			} else {
+				nbt = new NBTTagCompound();
+			}
+			
+			nbt.setFloat("PositionX", posStored.x);
+			nbt.setFloat("PositionY", posStored.y);
+			nbt.setFloat("PositionZ", posStored.z);
+			
+			stack.setTagCompound(nbt);
+			
 			return EnumActionResult.SUCCESS;
 		}
 	}
@@ -91,6 +128,26 @@ public class ItemCoordSaver extends Item {
 		tooltip.add(I18n.translateToLocal("item.coordsaver.click3"));
 		tooltip.add(TextFormatting.GOLD + I18n.translateToLocal("item.coordsaver.posstored") + (relativeCoords ? "." : ": "));
 		if(!PGenMain.instance.configStorage.relativeCoords) {
+
+			NBTTagCompound nbt;
+			float storedX = 0;
+			float storedY = 0;
+			float storedZ = 0;
+			
+			if(stack.hasTagCompound()) {
+				nbt = stack.getTagCompound();
+				if(nbt.hasKey("PositionX"))
+					storedX = stack.getTagCompound().getFloat("PositionX");
+
+				if(nbt.hasKey("PositionY"))
+					storedY = stack.getTagCompound().getFloat("PositionY");
+
+				if(nbt.hasKey("PositionZ"))
+					storedZ = stack.getTagCompound().getFloat("PositionZ");
+			}
+			
+			posStored = new Vec3f(storedX, storedY, storedZ);
+			
 			tooltip.add(" X: " + TextFormatting.BLUE + posStored.x);
 			tooltip.add(" Y: " + TextFormatting.BLUE + posStored.y);
 			tooltip.add(" Z: " + TextFormatting.BLUE + posStored.z);
